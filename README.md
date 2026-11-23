@@ -1,32 +1,38 @@
 # Monday 23 November 2026: 32 date-checked stories, 6 regions, 13 illustrations
 
-![stories](https://img.shields.io/badge/stories-32-blue)
-![regions](https://img.shields.io/badge/regions-6-green)
-![license](https://img.shields.io/badge/license-MIT-yellow)
+A single 1024×1024 image that sums up the world news of Monday, 23 November 2026.
 
-One image that sums up the world's news of Monday 23 November 2026:
-32 stories, 6 regions, 13 flat-drawn illustrations, a world map with
-numbered pins, a "day in numbers" strip, and a DATE CHECK footer that
-names the stories left out because they belong to other days.
+## What is in the picture
 
-Lead story: a Houthi missile is downed over western Saudi Arabia as
-the Iran war spreads to the Gulf (Al Jazeera, Reuters). Every story on
-the page happened, or was first reported, on 23 November 2026 — the
-Trump–Xi–Putin summit (19 Nov), the COP31 collapse (22 Nov), the
-Democrats' 258 House seats (22 Nov) and the Starship catch (14 Nov)
-are listed in the footer as other days' news, not as today's.
+Thirty-two stories, each checked against its publication date, spread across
+six world regions and drawn as thirteen illustrations. The biggest story of
+the day leads the composition: a Houthi missile shot down over western Saudi
+Arabia.
 
-## How it runs
+## Running it
 
-`main.py` is standard library only: it copies the bundled `entry.png`
-(a 1024×1024 PNG, 180,892 bytes) to `/output/entry.png`, verifying the
-PNG magic bytes, the 1 MiB gate, the SHA-256 and the exact size before
-writing, and re-reading the written copy to confirm it matches. No
-network, no third-party packages, deterministic — both runs write the
-same bytes.
+The entry ships with `main.py` (Python 3.13, standard library only) and the
+finished artwork as `entry.png`. From the repository root:
 
-## Competition
+```
+python3 main.py
+```
 
-Entry for the make.fun bounty
-[news-image-20261123](https://make.fun/bounty/news-image-20261123)
-("Sum up 23 November's world news in one image", $100).
+That verifies the artwork and writes a byte-identical copy to
+`/output/entry.png`.
+
+## Verifying the artwork
+
+`main.py` refuses to publish anything that does not match the expected
+fingerprint of the artwork exactly:
+
+- size: 180,892 bytes
+- SHA-256: `e8024ae52884f789710c097ea7a6ddcd872068e3ebc85c1d784f629ca3c121c8`
+- format: real PNG (magic-byte signature checked)
+
+Any mismatch prints an error and exits non-zero, so a corrupted or swapped
+image can never reach `/output` by accident.
+
+## Licence
+
+MIT — see `LICENSE`.
